@@ -20,7 +20,8 @@ function loadProfile() {
 
 // Load when popup opens
 document.addEventListener("DOMContentLoaded", loadProfile);
- 
+// changing small thigns 
+
 
 /* ---------------- SAVE DATA ---------------- */
 document.getElementById("save").onclick = () => {
