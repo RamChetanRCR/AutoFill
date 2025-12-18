@@ -17,7 +17,7 @@ function loadProfile() {
     });
   });
 }
-//hello
+
 // Load when popup opens
 document.addEventListener("DOMContentLoaded", loadProfile);
  
