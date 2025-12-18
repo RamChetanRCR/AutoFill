@@ -20,8 +20,6 @@ function loadProfile() {
 
 // Load when popup opens
 document.addEventListener("DOMContentLoaded", loadProfile);
-// changing small thigns 
-
 
 /* ---------------- SAVE DATA ---------------- */
 document.getElementById("save").onclick = () => {
@@ -50,7 +48,10 @@ document.getElementById('fill').onclick = () => {
   });
 };
 
-/* ---------------- CONTENT SCRIPT FUNCTION ---------------- */
+// Main Function is fillForm as it identifies the placeholders and 
+// if-else is enough to detect basic conditions (but it needs to have proper structure)
+
+
 function fillForm(profile) {
 
   function normalize(str = "") {
