@@ -17,9 +17,10 @@ function loadProfile() {
     });
   });
 }
-
+//hello
 // Load when popup opens
 document.addEventListener("DOMContentLoaded", loadProfile);
+ 
 
 /* ---------------- SAVE DATA ---------------- */
 document.getElementById("save").onclick = () => {
