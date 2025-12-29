@@ -1,9 +1,11 @@
 const fields = [
   'Full_Name','First_Name','Middle_Name','Last_Name',
+  'Gender',
   'email','phone','Country_Code','LinkedIn','GitHub','Portfolio',
   'Country','State','City',
   'Field_Study','CGPA','Graduation_Year',
-  'College_Name','University_Name','Address_Line1','Address_Line2','PinCode','Apt_flat'
+  'College_Name','University_Name',
+  'Address_Line1','Address_Line2','PinCode','Apt_flat'
 ];
 
 /* ---------------- LOAD STORED DATA ---------------- */
@@ -18,7 +20,6 @@ function loadProfile() {
   });
 }
 
-// Load when popup opens
 document.addEventListener("DOMContentLoaded", loadProfile);
 
 /* ---------------- SAVE DATA ---------------- */
@@ -48,11 +49,13 @@ document.getElementById('fill').onclick = () => {
   });
 };
 
-// Main Function is fillForm as it identifies the placeholders and 
-// if-else is enough to detect basic conditions (but it needs to have proper structure)
+/* ---------------- MAIN AUTOFILL FUNCTION ---------------- */
 
+async function fillForm(profile) {
 
-function fillForm(profile) {
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   function normalize(str = "") {
     return str.toLowerCase().replace(/\s+/g, "");
@@ -60,20 +63,18 @@ function fillForm(profile) {
 
   function getHumanText(el) {
     return normalize(
-      (el.labels?.[0]?.innerText || "") +
-      " " +
-      (el.placeholder || "") +
-      " " +
-      (el.getAttribute("aria-label") || "") +
-      " " +
-      (el.name || "") +
-      " " +
+      (el.labels?.[0]?.innerText || "") + " " +
+      (el.placeholder || "") + " " +
+      (el.getAttribute("aria-label") || "") + " " +
+      (el.name || "") + " " +
       (el.id || "")
     );
   }
 
-  document.querySelectorAll("input, textarea").forEach(el => {
-    if (el.value) return;
+  const elements = document.querySelectorAll("input, textarea");
+
+  for (const el of elements) {
+    if (el.value || el.disabled || el.readOnly) continue;
 
     const text = getHumanText(el);
 
@@ -92,7 +93,8 @@ function fillForm(profile) {
       (text.includes("name") && !text.includes("first") && !text.includes("last"))
     )
       el.value = profile.Full_Name;
-
+    else if (text.includes("gender") || text.includes("sex"))
+      el.value = profile.Gender;
     /* ---------- EMAIL ---------- */
     else if (
       text.includes("email") ||
@@ -146,10 +148,7 @@ function fillForm(profile) {
     )
       el.value = profile.Address_Line1;
 
-    else if (
-      text.includes("addressline2") ||
-      text.includes("line2")
-    )
+    else if (text.includes("addressline2") || text.includes("line2"))
       el.value = profile.Address_Line2;
 
     else if (text.includes("apt") || text.includes("flat"))
@@ -164,9 +163,18 @@ function fillForm(profile) {
     else if (text.includes("country"))
       el.value = profile.Country;
 
-    else if (text.includes("pincode") || text.includes("postal") || text.includes("zip"))
+    else if (
+      text.includes("pincode") ||
+      text.includes("postal") ||
+      text.includes("zip")
+    )
       el.value = profile.PinCode;
+
+    // trigger React / Angular listeners
     el.dispatchEvent(new Event("input", { bubbles: true }));
     el.dispatchEvent(new Event("change", { bubbles: true }));
-  });
+
+    // 🕒 HUMAN-LIKE DELAY
+    await delay(120);
+  }
 }
