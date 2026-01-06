@@ -1,51 +1,102 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            body { font-family: Arial; padding: 20px; width: 250px; }
-            input { width: 100%; margin: 10px 0; }
-            button { width: 100%; margin-top: 10px; }
-        </style>
-    </head>
-    <body>
-        <h1>Application Autofill</h1>
+<head>
+    <style>
+        body { font-family: Arial; padding: 20px; width: 300px; }
+        input { width: 100%; margin: 8px 0; padding: 5px; box-sizing: border-box; }
+        button { width: 100%; margin: 6px 0; padding: 8px; }
+        #index, #resume { display: none; }
+        h2, h3 { margin: 10px 0 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Application Autofill</h1>
+
+    <!-- Page Switch Buttons -->
+    <button class="btn-index">P1</button>
+    <button class="btn-resume">P2</button>
+
+    <!-- MANUAL ENTRY PAGE -->
+    <div id="index">
         <h2>Fill the details</h2>
-        <!-- Name details -->
+        <!-- Name -->
         <input id="Full_Name" placeholder="Full Name">
         <input id="First_Name" placeholder="First Name">
         <input id="Middle_Name" placeholder="Middle Name">
         <input id="Last_Name" placeholder="Last Name">
         <input id="Gender" placeholder="Gender (Male / Female / Other)">
-        <!-- email & phone no. -->
+        <!-- Contact -->
         <input id="email" placeholder="E-mail">
         <input id="phone" placeholder="Phone Number">
-        <input id="Country_Code" placeholder="Country_Code">
-        <!-- LinkedIn GitHub Portfolio -->
+        <input id="Country_Code" placeholder="Country Code">
+        <!-- Links -->
         <input id="LinkedIn" placeholder="LinkedIn Profile Link">
         <input id="GitHub" placeholder="GitHub Profile Link">
-        <input id="Portfolio" placeholder="Portfolio | Personal Website">
-
-        <!-- Location details -->
+        <input id="Portfolio" placeholder="Portfolio / Website">
+        <!-- Location -->
         <input id="Country" placeholder="Country">
         <input id="State" placeholder="State">
         <input id="City" placeholder="City">
-        <!-- Address Details -->
+        <!-- Address -->
         <input id="Address_Line1" placeholder="Address Line1">
         <input id="Address_Line2" placeholder="Address Line2">
         <input id="PinCode" placeholder="PinCode">
         <input id="Apt_flat" placeholder="Apt/Flat">
-        <!-- Education Details -->
+        <!-- Education -->
         <input id="Field_Study" placeholder="Field of Study">
         <input id="CGPA" placeholder="CGPA">
-        <input id="Graduation_Year" placeholder="Graduation_Year">
+        <input id="Graduation_Year" placeholder="Graduation Year">
+        <!-- College -->
+        <input id="College_Name" placeholder="College Name">
+        <input id="University_Name" placeholder="University Name">
 
-        <input id="College_Name" placeholder="College_Name">
-        <input id="University_Name" placeholder="University_Name">
+        <button class="btn-save">Save</button>
+        <button class="btn-fill">Auto Fill</button>
+    </div>
 
-        
+    <!-- RESUME IMPORT PAGE -->
+    <div id="resume">
+        <h2>Import Profile from Resume</h2>
+        <input type="file" id="resumeUpload" accept=".pdf,.docx">
+        <button id="parse">Parse Resume</button>
 
-        <button id="save">Save</button>
-        <button id="fill">Auto Fill</button>
+        <h3>Preview</h3>
+        <!-- Name -->
+        <input id="Full_Name" placeholder="Full Name">
+        <input id="First_Name" placeholder="First Name">
+        <input id="Middle_Name" placeholder="Middle Name">
+        <input id="Last_Name" placeholder="Last Name">
+        <input id="Gender" placeholder="Gender (Male / Female / Other)">
+        <!-- Contact -->
+        <input id="email" placeholder="E-mail">
+        <input id="phone" placeholder="Phone Number">
+        <input id="Country_Code" placeholder="Country Code">
+        <!-- Links -->
+        <input id="LinkedIn" placeholder="LinkedIn Profile Link">
+        <input id="GitHub" placeholder="GitHub Profile Link">
+        <input id="Portfolio" placeholder="Portfolio / Website">
+        <!-- Location -->
+        <input id="Country" placeholder="Country">
+        <input id="State" placeholder="State">
+        <input id="City" placeholder="City">
+        <!-- Address -->
+        <input id="Address_Line1" placeholder="Address Line1">
+        <input id="Address_Line2" placeholder="Address Line2">
+        <input id="PinCode" placeholder="PinCode">
+        <input id="Apt_flat" placeholder="Apt/Flat">
+        <!-- Education -->
+        <input id="Field_Study" placeholder="Field of Study">
+        <input id="CGPA" placeholder="CGPA">
+        <input id="Graduation_Year" placeholder="Graduation Year">
+        <!-- College -->
+        <input id="College_Name" placeholder="College Name">
+        <input id="University_Name" placeholder="University Name">
 
-        <script src='popup.js'></script>
-    </body>
+        <button class="btn-save">Save</button>
+        <button class="btn-fill">Auto Fill</button>
+    </div>
+
+        <script src="libs/pdf/pdf.min.js"></script>
+        <script src="popup.js"></script>
+</body>
 </html>
