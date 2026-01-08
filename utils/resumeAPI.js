@@ -5,7 +5,7 @@ export async function parseResumeWithAPI(file) {
   const response = await fetch("https://resumeparser-api.p.rapidapi.com/", {
     method: "POST",
     headers: {
-      "X-RapidAPI-Key": "bca137110cmsh17e434d08c8738cp119e2cjsne97e53c752f1",
+      "X-RapidAPI-Key": "~",
       "X-RapidAPI-Host": "resumeparser-api.p.rapidapi.com"
     },
     body: formData
@@ -31,5 +31,6 @@ export async function parseResumeWithAPI(file) {
     CGPA: result.education?.cgpa || "",
     Graduation_Year: result.education?.year || "",
     Field_Study: result.education?.field || ""
+    
   };
 }
