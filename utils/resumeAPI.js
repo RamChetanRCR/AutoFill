@@ -1,36 +1,18 @@
+// utils/resumeAPI.js
+// Frontend ONLY sends the PDF to backend
+
 export async function parseResumeWithAPI(file) {
   const formData = new FormData();
-  formData.append("resume", file);
+  formData.append("file", file);
 
-  const response = await fetch("https://resumeparser-api.p.rapidapi.com/", {
+  const response = await fetch("http://localhost:3000/parse-resume", {
     method: "POST",
-    headers: {
-      "X-RapidAPI-Key": "~",
-      "X-RapidAPI-Host": "resumeparser-api.p.rapidapi.com"
-    },
     body: formData
   });
 
-  console.log("Raw API response:", response); 
+  if (!response.ok) {
+    throw new Error("Resume parsing failed");
+  }
 
-  const result = await response.json();
-  console.log("Parsed JSON:", result);
-
-  return {
-    Full_Name: result.name || "",
-    First_Name: result.first_name || "",
-    Last_Name: result.last_name || "",
-    Middle_Name: result.middle_name || "",
-    email: result.email || "",
-    phone: result.phone || "",
-    LinkedIn: result.linkedin || "",
-    GitHub: result.github || "",
-    Portfolio: result.portfolio || "",
-    College_Name: result.education?.college || "",
-    University_Name: result.education?.university || "",
-    CGPA: result.education?.cgpa || "",
-    Graduation_Year: result.education?.year || "",
-    Field_Study: result.education?.field || ""
-    
-  };
+  return await response.json();
 }

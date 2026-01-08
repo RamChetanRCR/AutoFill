@@ -93,15 +93,23 @@ function autofillCurrentPage(profile) {
  ***********************/
 document.getElementById("parse").onclick = async () => {
   const fileInput = document.getElementById("resumeUpload");
-  if (!fileInput.files.length) return alert("Select a PDF");
+  if (!fileInput.files.length) {
+    alert("Select a resume PDF");
+    return;
+  }
 
   try {
     const profile = await parseResumeWithAPI(fileInput.files[0]);
+
+    console.log("Parsed profile:", profile);
+
     loadProfileIntoPage(pageResume, profile);
     saveProfile("resumeProfile", profile);
-    alert("Resume parsed and saved!");
+
+    alert("Resume parsed successfully!");
   } catch (err) {
-    console.error("Resume parsing failed:", err);
-    alert("Failed to parse resume. Check console.");
+    console.error(err);
+    alert("Resume parsing failed. Check console.");
   }
 };
+
