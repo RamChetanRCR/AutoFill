@@ -28,7 +28,7 @@ Chrome Extensions API (Manifest v3)
 GroqCloud API
 HTML / CSS
 
-##Run Locally
+## Run Locally
 
 Clone the repository
 Open chrome://extensions/
